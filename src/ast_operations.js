@@ -44,6 +44,10 @@ function replaceStyle(styleString) {
   return "ReactDOMRe.Style.make(" + labels + " ())";
 }
 
+function replaceClassNameForTailwindPPX(classNameString) {
+  return '%tw("' + classNameString + '")';
+}
+
 const convertTag = (node) => {
   if (node.tag) {
     const tag = posthtmlRender.camelCase(node.tag);
@@ -65,6 +69,20 @@ const convertStyle = (node) => {
   return node;
 };
 
+const convertClassName = (node, useTailwind) => {
+  if (node.attrs && node.attrs.className) {
+    return {
+      ...node,
+      attrs: {
+        ...node.attrs,
+        className: useTailwind
+          ? replaceClassNameForTailwindPPX(node.attrs.className)
+          : node.attrs.className,
+      },
+    };
+  }
+};
+
 const convertAttributeName = (node) => {
   if (Object.keys(node.attrs || {}).length > 0) {
     const entries = Object.entries(node.attrs || {}).map(([key, value]) => {
@@ -80,7 +98,6 @@ const convertAttributeName = (node) => {
           : reasonHelpers.isReservedKeyword(base)
           ? reasonHelpers.mangleNameAsAttribute(base)
           : base;
-
       return [newKey, value.trim()];
     });
 
@@ -107,7 +124,7 @@ const prepareRawTextNode = (node) => {
 
   const decoded = entities.decode(cleaned);
 
-  return `{j|${decoded}|j}->string`;
+  return `{"${decoded}"->React.string}`;
 };
 
 const isCommentNode = (node) => {
@@ -138,14 +155,16 @@ const posthtmlReason = (tree) => {
       node = convertTag(node);
       node = convertAttributeName(node);
       node = convertStyle(node);
+      node = convertClassName(node, true);
 
       return node;
     }
   });
 };
 
-const transform = (name, data) => {
+const transform = (name, data, useTailwind) => {
   console.debug("Transforming", name);
+  console.debug("Use Tailwind", useTailwind ? "YES" : "NO");
   const p = posthtml();
 
   const html = p.use(posthtmlReason).process(data, {

@@ -1,10 +1,10 @@
 open React;
 let header =
-  <div className="flex items-center justify-between p-6 shadow mb-6 bg-white">
+  <div className="flex items-center justify-between p-6 mb-6 bg-white shadow">
     <div className="flex-1 min-w-0">
       <h2
-        className="text-2xl font-bold leading-7 text-gray-700 sm:text-3xl sm:leading-9 sm:truncate">
-        "HTML to Reason"->string
+        className="text-2xl font-bold text-gray-700 leading-7 sm:text-3xl sm:leading-9 sm:truncate">
+        "HTML to Rescript"->string
       </h2>
     </div>
     <div className="text-sm text-gray-400">
@@ -24,10 +24,10 @@ let header =
   </div>;
 
 let footer =
-  <div className="bg-gray-400 text-gray-600 p-6 py-6 text-xs">
+  <div className="p-6 py-6 text-xs text-gray-600 bg-gray-400">
     <div className="grid grid-cols-2 gap-4">
       <div>
-        <h2 className="font-semibold text-lg mb-2 text-gray-700">
+        <h2 className="mb-2 text-lg font-semibold text-gray-700">
           "What this does"->string
         </h2>
         <ul>
@@ -39,7 +39,7 @@ let footer =
             "Decodes entities in text, then wraps it in quotes and ->string"
             ->string
           </li>
-          <li> "Converts HTML comments to Reason comments"->string </li>
+          <li> "Converts HTML comments to Rescript comments"->string </li>
           <li> "Closes self-closing attributes"->string </li>
           <li>
             "Converts 'style' attribute into "->string
@@ -49,7 +49,7 @@ let footer =
         </ul>
       </div>
       <div>
-        <h2 className="font-semibold text-lg mb-2 text-gray-700">
+        <h2 className="mb-2 text-lg font-semibold text-gray-700">
           "Made Possible By"->string
         </h2>
         <ul>

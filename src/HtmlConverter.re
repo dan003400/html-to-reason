@@ -1,4 +1,5 @@
 [@bs.module]
-external transform: (string, string) => string = "./ast_operations.js";
+external transform: (string, string, bool) => string = "./ast_operations.js";
 
-let convert = (name, source) => transform(name, source);
+let convert = (name, source, useTailwind) =>
+  transform(name, source, useTailwind);
