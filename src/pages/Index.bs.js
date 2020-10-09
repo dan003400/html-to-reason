@@ -7,7 +7,7 @@ var Copy_textJs = require("../copy_text.js");
 var Templates$LoginForm = require("../Templates.bs.js");
 var HtmlConverter$LoginForm = require("../HtmlConverter.bs.js");
 
-var defaultText = "<div class=\"flex items-center w-full\" style=\"font-weight: bolder\">Hello there! Go on &amp; convert your html!</div>";
+var defaultText = "<div style=\"font-weight: bolder\">Hello there! Go on &amp; convert your html!</div>";
 
 var initialState_jsx = HtmlConverter$LoginForm.convert("__DEFAULT__", defaultText, false);
 

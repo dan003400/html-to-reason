@@ -1,6 +1,6 @@
 open React;
 
-let defaultText = {j|<div class="flex items-center w-full" style="font-weight: bolder">Hello there! Go on &amp; convert your html!</div>|j};
+let defaultText = {j|<div style="font-weight: bolder">Hello there! Go on &amp; convert your html!</div>|j};
 
 type state = {
   html: string,

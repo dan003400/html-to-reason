@@ -45,7 +45,7 @@ function replaceStyle(styleString) {
 }
 
 function replaceClassNameForTailwindPPX(classNameString) {
-  return '%tw("' + classNameString + '")';
+  return `%tw("${classNameString}")`;
 }
 
 const convertTag = (node) => {
@@ -81,6 +81,8 @@ const convertClassName = (node, useTailwind) => {
       },
     };
   }
+
+  return node;
 };
 
 const convertAttributeName = (node) => {
@@ -152,9 +154,13 @@ const posthtmlReason = (tree) => {
       }
     } else {
       let node = { ...originalNode };
+
       node = convertTag(node);
       node = convertAttributeName(node);
       node = convertStyle(node);
+
+      console.log(convertClassName(node, true));
+
       node = convertClassName(node, true);
 
       return node;
@@ -163,8 +169,6 @@ const posthtmlReason = (tree) => {
 };
 
 const transform = (name, data, useTailwind) => {
-  console.debug("Transforming", name);
-  console.debug("Use Tailwind", useTailwind ? "YES" : "NO");
   const p = posthtml();
 
   const html = p.use(posthtmlReason).process(data, {
