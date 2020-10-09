@@ -158,9 +158,6 @@ const posthtmlReason = (tree) => {
       node = convertTag(node);
       node = convertAttributeName(node);
       node = convertStyle(node);
-
-      console.log(convertClassName(node, true));
-
       node = convertClassName(node, true);
 
       return node;
